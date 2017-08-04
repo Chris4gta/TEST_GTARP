@@ -86,6 +86,7 @@
     <Compile Include="Lib\Helper\Player.cs" />
     <Compile Include="Lib\Threads\UpdatePlayerPlayTime.cs" />
     <Compile Include="Lib\Threads\UpdateWeather.cs" />
+    <Compile Include="Lib\Trainer\freeroam.cs" />
     <Compile Include="Lib\User\Management\MoneyManager.cs" />
     <Compile Include="Lib\User\Management\PayDayManager.cs" />
     <Compile Include="Lib\User\Management\RpLevelManager.cs" />
@@ -95,6 +96,9 @@
     <Compile Include="Lib\User\StartUp\PlayerRegister.cs" />
     <Compile Include="Lib\User\StartUp\PlayerConnection.cs" />
     <Compile Include="Lib\Threads\StorePlayerData.cs" />
+    <Compile Include="Lib\VehicleOptions\engine\Server\engine.cs" />
+    <Compile Include="Lib\VehicleOptions\vehOpt\Server\vehicleFuel.cs" />
+    <Compile Include="Lib\VehicleOptions\vehOpt\Server\vehicleHP.cs" />
     <Compile Include="TerraTex_RL_RPG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -194,10 +198,22 @@
     <Content Include="Configs\server_example.xml" />
     <Content Include="Gruntfile.js" />
     <Content Include="Lib\Hud\InfoHud.js" />
+    <Content Include="Lib\Trainer\trainer\player.js" />
+    <Content Include="Lib\Trainer\trainer\trainer.js" />
+    <Content Include="Lib\Trainer\trainer\vehicles.js" />
+    <Content Include="Lib\Trainer\trainer\weapons.js" />
     <Content Include="Lib\User\Management\UI\PayDayUI.js" />
     <Content Include="Lib\User\StartUp\PlayerConnection_Client.js" />
     <Content Include="Lib\User\StartUp\PlayerConnection_Login_Client.js" />
     <Content Include="Lib\User\StartUp\PlayerConnection_Register_Client.js" />
+    <Content Include="Lib\VehicleOptions\engine\Client\engine.js" />
+    <Content Include="Lib\VehicleOptions\images\vehicle.png" />
+    <Content Include="Lib\VehicleOptions\images\vehicledmgicon.png" />
+    <Content Include="Lib\VehicleOptions\images\vehiclefuelicon.png" />
+    <Content Include="Lib\VehicleOptions\images\vehiclespeedicon.png" />
+    <Content Include="Lib\VehicleOptions\speed\Client\speed.js" />
+    <Content Include="Lib\VehicleOptions\vehOpt\Client\vehicleFuel.js" />
+    <Content Include="Lib\VehicleOptions\vehOpt\Client\vehicleHP.js" />
     <Content Include="meta.xml">
       <SubType>Designer</SubType>
     </Content>
