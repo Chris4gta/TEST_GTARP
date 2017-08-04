@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <servername>GTA RP Test CP</servername>
+  <serverport>4499</serverport>
+  <maxplayers>50</maxplayers>
+  <minclientversion>0.0.0.0</minclientversion>
+  <minclientversion_auto_update>true</minclientversion_auto_update>
+  <announce>true</announce>
+  <password></password>
+  <masterserver>http://master.mta-v.net/api/</masterserver>
+  <acl_enabled>true</acl_enabled>
+  <loglevel>Debug</loglevel>
+  <log>true</log>
+  <global_streaming_range>175</global_streaming_range>
+  <player_streaming_range>500</player_streaming_range>
+  <vehicle_streaming_range>250</vehicle_streaming_range>
+  <vehicle_lagcomp>true</vehicle_lagcomp>
+  <onfoot_lagcomp>true</onfoot_lagcomp>
+  <refresh_rate>120</refresh_rate>
+  <resource src="TerraTex-RL-RPG" />
+  <announce_lan>true</announce_lan>
+  <upnp>false</upnp>
+  <fqdn></fqdn>
+  <conntimeout>false</conntimeout>
+  <allow_client_devtools>false</allow_client_devtools>
+</config>

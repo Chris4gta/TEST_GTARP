@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Registration</title>
+    <script src="../general/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="../general/Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../general/Styles/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="../custom/styles.css"/>
+    <script src="../custom/clipboard.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <form role="form" onsubmit="executeFormCheck(); return false;">
+        <div class="form-control">
+            <h3>Willkommen auf dem<br/>TerraTex Reallife Roleplay Game Server</h3>
+            <img src="../custom/Images/logo.png" class="register-image-logo"/>Willkommen auf dem Server. Unter deinem Pseudonym <b>"<span data-insert="nickname">${nickname}</span>"</b> wurde ein Account gefunden. 
+            Bitte Authentifiziere dich mit deinem Passwort. Solltest du dein Passwort vergessen haben, kannst du dich im Forum unter <a href="https://forum.terratex.eu" class="web">https://forum.terratex.eu</a> oder unter der E-Mail <a href="support@terratex.eu" class="web">support@terratex.eu</a>
+            melden.
+            <div class="clear"></div>
+        </div>
+        <div class="form-control">
+            <div class="form-group">
+                <label for="password" class="font-weight-bold">Passwort</label>
+                <input type="password" class="form-control" id="password" placeholder="Passwort" required>
+            </div>
+        </div>
+        <div class="form-control">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <!--<button type="submit" class="btn btn-warning">Passwort vergessen</button>-->
+        </div>
+    </form>
+    
+    <script>
+        
+        $(document).ready(function () {
+            resourceCall("sendMeNickname");
+        });
+
+        function setPlayerNickname(nickname) {
+            $("span[data-insert=nickname]").html(nickname);
+        }
+
+        function executeFormCheck() {
+            //check password
+            resourceCall("sendLogin", $("#password").val());
+        }
+    </script>
+</div>
+</body>
+</html>

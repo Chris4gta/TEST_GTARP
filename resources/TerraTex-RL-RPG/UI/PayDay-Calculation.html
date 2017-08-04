@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Registration</title>
+    <script src="general/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="general/Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="general/Styles/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="custom/styles.css"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="card-group">
+        <div class="card">
+            <div class="card-header card-success text-white font-weight-bold">
+                Einnahmen
+            </div>
+            <ul class="list-group" id="income">
+            </ul>
+            <div class="card-footer flex mtop">
+                Summe: <span class="text-success mleft font-weight-bold" id="incomesum">0,00 €</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header card-danger text-white font-weight-bold">
+                Ausgaben
+            </div>
+            <ul class="list-group" id="outgoing">
+            </ul>
+            <div class="card-footer flex mtop">
+                Summe: <span class="text-danger mleft font-weight-bold" id="outgoingsum">0,00 €</span>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-footer text-center">
+            Gesamt PayDay: <span class="text-success font-weight-bold" id="totalsum">0,00 €</span>
+        </div>
+    </div>
+    <div class="btn btn-danger btn-border-white pftr" id="close"> Beenden </div>
+
+    <script>
+        let incomeSum = 0;
+        let outgoingSum = 0;
+
+        function addIncome(name, value) {
+            incomeSum += value;
+            let valueStr = value.toFixed(2).replace(/\./g, ",").replace(/./g,
+                function(c, i, a) {
+                    return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+                });
+            $("#income").append("<li class='list-group-item list-group-item-action'>" +
+                name +
+                " <span class='text-success mleft'>" +
+                valueStr +
+                " €</span></li>");
+
+            let sumStr = incomeSum.toFixed(2).replace(/\./g, ",").replace(/./g,
+                function(c, i, a) {
+                    return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+                });
+            $("#incomesum").text(sumStr + " €");
+
+            calcTotal();
+        }
+
+        function addOutgoing(name, value) {
+            if (value < 0) {
+                value = -value;
+            }
+
+            outgoingSum += value;
+            let valueStr = value.toFixed(2).replace(/\./g, ",").replace(/./g,
+                function(c, i, a) {
+                    return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+                });
+            $("#outgoing").append("<li class='list-group-item list-group-item-action'>" +
+                name +
+                " <span class='text-danger mleft'> - " +
+                valueStr +
+                " €</span></li>");
+
+            let sumStr = outgoingSum.toFixed(2).replace(/\./g, ",").replace(/./g,
+                function(c, i, a) {
+                    return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+                });
+            $("#outgoingsum").text("- " + sumStr + " €");
+
+            calcTotal();
+        }
+
+        function calcTotal() {
+            let total = incomeSum - outgoingSum;
+
+            
+            if (total < 0) {
+
+                let sumStr = (-total).toFixed(2)
+                    .replace(/\./g, ",")
+                    .replace(/./g,
+                        function(c, i, a) {
+                            return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+                        });
+
+
+                $("#totalsum").text("- " + sumStr + " €");
+                $("#totalsum").removeClass("text-success").addClass("text-danger");
+            } else {
+
+                let sumStr = (total).toFixed(2)
+                    .replace(/\./g, ",")
+                    .replace(/./g,
+                        function(c, i, a) {
+                            return i && c !== "," && ((a.length - i) % 3 === 0) ? '.' + c : c;
+                        });
+
+                $("#totalsum").text(sumStr + " €");
+                $("#totalsum").removeClass("text-danger").addClass("text-success");
+            }
+ 
+        }
+
+        $(document).ready(function() {
+            $("#close").click(function() {
+                resourceCall("closeWindow");
+            });
+ 
+            resourceCall("loadComplete");
+        });
+ 
+    
+    </script>
+</div>
+</body>
+</html>

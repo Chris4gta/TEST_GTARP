@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="SonarQube - TerraTex GT-MP Reallife RPG Sonar way" ToolsVersion="15.0">
+  <Include Path="..\sonarqube\terratex_gtmp-rl-rpgcsharp.ruleset" Action="Default" />
+</RuleSet>

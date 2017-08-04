@@ -1,0 +1,55 @@
+﻿<meta>
+  <info name="TerraTex Roleplay / Reallife Script"
+         description="A mixed roleplay and reallife script"
+         author="TerraTex-Community, Geramy92"
+         version="0.0.1"
+         type="gamemode" />
+
+
+  
+    <script src="bin/Debug/TerraTex-RL-RPG.dll" type="server" lang="compiled" />
+    <script src="Lib/User/StartUp/PlayerConnection_Client.js" type="client" lang="javascript" />
+    <script src="Lib/User/StartUp/PlayerConnection_Register_Client.js" type="client" lang="javascript" />
+    <script src="Lib/User/StartUp/PlayerConnection_Login_Client.js" type="client" lang="javascript" />
+    <script src="Lib/User/Management/UI/PayDayUI.js" type="client" lang="javascript" />
+    <script src="Lib/Hud/InfoHud.js" type="client" lang="javascript" />
+	
+	<!-- Trainer Menu-->
+    <script src="Lib/Trainer/freeroam.cs" type="server" lang="csharp" />
+    <script src="Lib/Trainer/trainer/trainer.js" type="client" />
+    <script src="Lib/Trainer/trainer/player.js" type="client" />
+    <script src="Lib/Trainer/trainer/weapons.js" type="client" />
+    <script src="Lib/Trainer/trainer/vehicles.js" type="client" />
+	
+	<!-- Vehicle Options -->
+    <info name="engine" author="Plenzdorf" type="script" />
+    <script src="Lib/VehicleOptions/engine/Server/engine.cs" type="server" lang="csharp" />
+    <script src="Lib/VehicleOptions/engine/Client/engine.js" type="client" />
+	<script src="Lib/VehicleOptions/vehOpt/Server/vehicleHP.cs" type="server" lang="csharp" />
+	<script src="Lib/VehicleOptions/vehOpt/Client/vehicleHP.js" type="client" />
+	<script src="Lib/VehicleOptions/vehOpt/Server/vehicleFuel.cs" type="server" lang="csharp" />
+	<script src="Lib/VehicleOptions/vehOpt/Client/vehicleFuel.js" type="client" />
+	<script src="Lib/VehicleOptions/speed/Client/speed.js" type="client" />	
+	
+	<file src="Lib/VehicleOptions/images/vehicledmgicon.png" />
+	<file src="Lib/VehicleOptions/images/vehiclefuelicon.png" />
+	<file src="Lib/VehicleOptions/images/vehiclespeedicon.png" />
+	
+	
+    <!-- UI Stuff-->
+      <file src="UI/custom/styles.css" />
+      <file src="UI/custom/clipboard.js" />
+      <file src="UI/custom/Images/logo.png" />
+      <file src="UI/general/Scripts/bootstrap.min.js" />
+      <file src="UI/general/Scripts/fingerprint2.min.js" />
+      <file src="UI/general/Scripts/jquery-3.1.1.min.js" />
+      <file src="UI/general/Styles/bootstrap/bootstrap.css" />
+      <file src="UI/Register_Login_Profile/Register.html" />
+      <file src="UI/Register_Login_Profile/Login.html" />
+      <file src="UI/Register_Login_Profile/GetFingerprint.html" />
+      <file src="UI/PayDay-Calculation.html" />
+
+
+    <include resource="scoreboard" />
+  
+</meta>
