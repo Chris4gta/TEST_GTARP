@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>TerraTex-RL-RPG.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\SonarQube\2ndlifeGTA_gtmp-rl-rpgCSharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>TerraTex-RL-RPG.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\SonarQube\2ndlifeGTA_gtmp-rl-rpgCSharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
@@ -99,13 +99,13 @@
     <Compile Include="Lib\VehicleOptions\engine\Server\engine.cs" />
     <Compile Include="Lib\VehicleOptions\vehOpt\Server\vehicleFuel.cs" />
     <Compile Include="Lib\VehicleOptions\vehOpt\Server\vehicleHP.cs" />
-    <Compile Include="TerraTex_RL_RPG.cs" />
+    <Compile Include="2ndLifeGTARPG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="package.json" />
-    <None Include="TerraTex-RL-RPG.ruleset" />
+    <None Include="2ndLifeGTARPG.ruleset" />
     <None Include="UI\custom\styles.scss" />
     <None Include="UI\general\Styles\bootstrap\bootstrap-grid.scss" />
     <None Include="UI\general\Styles\bootstrap\bootstrap-reboot.scss" />
@@ -194,8 +194,8 @@
     <None Include="UI\general\Scripts\jquery-3.1.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configs\database_example.xml" />
-    <Content Include="Configs\server_example.xml" />
+    <Content Include="Configs\database.xml" />
+    <Content Include="Configs\server.xml" />
     <Content Include="Gruntfile.js" />
     <Content Include="Lib\Hud\InfoHud.js" />
     <Content Include="Lib\Trainer\trainer\player.js" />

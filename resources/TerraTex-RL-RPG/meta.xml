@@ -1,7 +1,7 @@
 ﻿<meta>
-  <info name="TerraTex Roleplay / Reallife Script"
+  <info name="2ndLifeGTA Roleplay / Reallife Script"
          description="A mixed roleplay and reallife script"
-         author="TerraTex-Community, Geramy92"
+         author="2ndLifeGTA-Community, Geramy92"
          version="0.0.1"
          type="gamemode" />
 
@@ -36,20 +36,19 @@
 	<file src="Lib/VehicleOptions/images/vehiclespeedicon.png" />
 	
 	
-    <!-- UI Stuff-->
-      <file src="UI/custom/styles.css" />
-      <file src="UI/custom/clipboard.js" />
-      <file src="UI/custom/Images/logo.png" />
-      <file src="UI/general/Scripts/bootstrap.min.js" />
-      <file src="UI/general/Scripts/fingerprint2.min.js" />
-      <file src="UI/general/Scripts/jquery-3.1.1.min.js" />
-      <file src="UI/general/Styles/bootstrap/bootstrap.css" />
-      <file src="UI/Register_Login_Profile/Register.html" />
-      <file src="UI/Register_Login_Profile/Login.html" />
-      <file src="UI/Register_Login_Profile/GetFingerprint.html" />
-      <file src="UI/PayDay-Calculation.html" />
-
-
+	<!-- UI Stuff-->
+    <file src="UI/custom/styles.css" />
+    <file src="UI/custom/clipboard.js" />
+    <file src="UI/custom/Images/logo.png" />
+    <file src="UI/general/Scripts/bootstrap.min.js" />
+    <file src="UI/general/Scripts/fingerprint2.min.js" />
+    <file src="UI/general/Scripts/jquery-3.1.1.min.js" />
+    <file src="UI/general/Styles/bootstrap/bootstrap.css" />
+    <file src="UI/Register_Login_Profile/Register.html" />
+    <file src="UI/Register_Login_Profile/Login.html" />
+    <file src="UI/Register_Login_Profile/GetFingerprint.html" />
+    <file src="UI/PayDay-Calculation.html" />
+	
     <include resource="scoreboard" />
   
 </meta>

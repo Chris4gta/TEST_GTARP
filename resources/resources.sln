@@ -1,14 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraTex-RL-RPG", "TerraTex-RL-RPG\TerraTex-RL-RPG.csproj", "{385EE243-0DD0-4FBF-9D33-376E50520874}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2ndLifeGTARPG", "TerraTex-RL-RPG\2ndLifeGTARPG.csproj", "{385EE243-0DD0-4FBF-9D33-376E50520874}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{1B8F2EF5-A4DA-4AC2-8010-365667F508BF}"
 	ProjectSection(SolutionItems) = preProject
+		SonarQube\2ndlifeGTA_gtmp-rl-rpgCSharp.ruleset = SonarQube\2ndlifeGTA_gtmp-rl-rpgCSharp.ruleset
 		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
-		SonarQube\terratex_gtmp-rl-rpgCSharp.ruleset = SonarQube\terratex_gtmp-rl-rpgCSharp.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scoreboard", "Scoreboard", "{E2B21FC0-22E5-4704-B814-E141D8747297}"
+	ProjectSection(SolutionItems) = preProject
+		scoreboard\meta.xml = scoreboard\meta.xml
+		scoreboard\scoreboard.cs = scoreboard\scoreboard.cs
+		scoreboard\scoreboard_local.js = scoreboard\scoreboard_local.js
 	EndProjectSection
 EndProject
 Global

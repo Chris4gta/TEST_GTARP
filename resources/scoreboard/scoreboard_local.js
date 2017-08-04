@@ -14,6 +14,7 @@ API.onUpdate.connect(function(s,e) {
 
 		var res = API.getScreenResolutionMaintainRatio();
 		var players = API.getAllPlayers();
+		
 
 		var columnList = API.getWorldSyncedData("scoreboard_column_names");
 		if (columnList == null) return;
@@ -68,14 +69,14 @@ API.onUpdate.connect(function(s,e) {
 		
 		for (var i = 0; i < players.Length; i++) {
 			if (API.getPlayerName(players[i]) == null) continue;
-
+			
 			var color = 50;
 			if (i % 2 == 0)
 				color = 70;
 
 			API.drawRectangle(startX, startY + 80 + 40 * i, totalWidth, 40, color, color, color, 200);
 			API.drawText(API.getPlayerName(players[i]), startX + 10, startY + 85 + 40 * i, 0.4, 255, 255, 255, 255, 4, 0, false, true, 0);
-
+			
 			currentCW = 0;
 			for (var j = 0; j < columnList.Count; j++) {
 				var columnData = API.getEntitySyncedData(players[i], columnList[j]);
@@ -85,7 +86,7 @@ API.onUpdate.connect(function(s,e) {
 
 				if (columnData != null) {
 					API.drawText(API.toString(columnData), res.Width - startX - currentCW - 5, startY + 85 + 40 * i, 0.4, 255, 255, 255, 255, 4, 2, false, true, 0);
-
+			
 					currentCW += columnWidths[j];
 				}
 			}

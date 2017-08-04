@@ -51,7 +51,7 @@ public class ScoreboardScript : Script
             currentFNames.Add(friendlyName);
             currentWidths.Add(width);
         }
-
+		
         API.setWorldSyncedData("scoreboard_column_names", currentNames);
         API.setWorldSyncedData("scoreboard_column_friendlynames", currentFNames);
         API.setWorldSyncedData("scoreboard_column_widths", currentWidths);
