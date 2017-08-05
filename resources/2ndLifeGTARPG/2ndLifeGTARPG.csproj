@@ -96,10 +96,11 @@
     <Compile Include="Lib\User\StartUp\PlayerRegister.cs" />
     <Compile Include="Lib\User\StartUp\PlayerConnection.cs" />
     <Compile Include="Lib\Threads\StorePlayerData.cs" />
+    <Compile Include="2ndLifeGTARPG.cs" />
     <Compile Include="Lib\VehicleOptions\engine\Server\engine.cs" />
     <Compile Include="Lib\VehicleOptions\vehOpt\Server\vehicleFuel.cs" />
     <Compile Include="Lib\VehicleOptions\vehOpt\Server\vehicleHP.cs" />
-    <Compile Include="2ndLifeGTARPG.cs" />
+    <Compile Include="Lib\Vehicles\LastUsage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

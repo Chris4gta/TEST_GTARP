@@ -15,7 +15,6 @@
     <script src="Lib/Hud/InfoHud.js" type="client" lang="javascript" />
 	
 	<!-- Trainer Menu-->
-    <script src="Lib/Trainer/freeroam.cs" type="server" lang="csharp" />
     <script src="Lib/Trainer/trainer/trainer.js" type="client" />
     <script src="Lib/Trainer/trainer/player.js" type="client" />
     <script src="Lib/Trainer/trainer/weapons.js" type="client" />
@@ -23,11 +22,8 @@
 	
 	<!-- Vehicle Options -->
     <info name="engine" author="Plenzdorf" type="script" />
-    <script src="Lib/VehicleOptions/engine/Server/engine.cs" type="server" lang="csharp" />
     <script src="Lib/VehicleOptions/engine/Client/engine.js" type="client" />
-	<script src="Lib/VehicleOptions/vehOpt/Server/vehicleHP.cs" type="server" lang="csharp" />
 	<script src="Lib/VehicleOptions/vehOpt/Client/vehicleHP.js" type="client" />
-	<script src="Lib/VehicleOptions/vehOpt/Server/vehicleFuel.cs" type="server" lang="csharp" />
 	<script src="Lib/VehicleOptions/vehOpt/Client/vehicleFuel.js" type="client" />
 	<script src="Lib/VehicleOptions/speed/Client/speed.js" type="client" />	
 	

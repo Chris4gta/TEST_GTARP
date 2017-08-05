@@ -71,13 +71,13 @@ public class FreeroamScript : Script
 
     public void onClientEventTrigger(Client sender, string name, object[] args)
     { 
-        if (name == "CREATE_NEW_VEHICLE")
+        if (name == "CREATE_VEHICLE")
         {			
             int model = (int)args[0];
 		
             if (!Enum.IsDefined(typeof(VehicleHash), model))
                 return;
-
+            
             var rot = API.getEntityRotation(sender.handle);
             var veh = API.createVehicle((VehicleHash)model, sender.position, new Vector3(0, 0, rot.Z), 0, 0);
 
