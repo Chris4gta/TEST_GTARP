@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{385EE243-0DD0-4FBF-9D33-376E50520874}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TerraTex_RL_RPG</RootNamespace>
+    <AssemblyName>TerraTex-RL-RPG</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\SonarQube\2ndlifeGTA_gtmp-rl-rpgCSharp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\SonarQube\2ndlifeGTA_gtmp-rl-rpgCSharp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.3.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.3.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="GrandTheftMultiplayer.Server, Version=0.1.513.481, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\grandtheftmultiplayer.api.0.1.513.481\lib\net452\GrandTheftMultiplayer.Server.exe</HintPath>
+    </Reference>
+    <Reference Include="GrandTheftMultiplayer.Shared, Version=0.1.489.410, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\grandtheftmultiplayer.api.0.1.513.481\lib\net452\GrandTheftMultiplayer.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=7.0.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.7.0.7-m61\lib\net451\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.0.0-beta07\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Lib\Admin\AdminChecks.cs" />
+    <Compile Include="Lib\Admin\DevServer.cs" />
+    <Compile Include="Lib\Admin\DevServerCommands.cs" />
+    <Compile Include="Lib\Data\Configs.cs" />
+    <Compile Include="Lib\Data\Database.cs" />
+    <Compile Include="Lib\Helper\LoadedDie.cs" />
+    <Compile Include="Lib\Helper\Password.cs" />
+    <Compile Include="Lib\Helper\Player.cs" />
+    <Compile Include="Lib\Threads\UpdatePlayerPlayTime.cs" />
+    <Compile Include="Lib\Threads\UpdateWeather.cs" />
+    <Compile Include="Lib\Trainer\freeroam.cs" />
+    <Compile Include="Lib\User\Management\MoneyManager.cs" />
+    <Compile Include="Lib\User\Management\PayDayManager.cs" />
+    <Compile Include="Lib\User\Management\RpLevelManager.cs" />
+    <Compile Include="Lib\User\SpawnAndDeath\PlayerSpawnManager.cs" />
+    <Compile Include="Lib\User\StartUp\PlayerDisconnection.cs" />
+    <Compile Include="Lib\User\StartUp\PlayerLogin.cs" />
+    <Compile Include="Lib\User\StartUp\PlayerRegister.cs" />
+    <Compile Include="Lib\User\StartUp\PlayerConnection.cs" />
+    <Compile Include="Lib\Threads\StorePlayerData.cs" />
+    <Compile Include="Lib\VehicleOptions\engine\Server\engine.cs" />
+    <Compile Include="Lib\VehicleOptions\vehOpt\Server\vehicleFuel.cs" />
+    <Compile Include="Lib\VehicleOptions\vehOpt\Server\vehicleHP.cs" />
+    <Compile Include="2ndLifeGTARPG.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="package.json" />
+    <None Include="2ndLifeGTARPG.ruleset" />
+    <None Include="UI\custom\styles.scss" />
+    <None Include="UI\general\Styles\bootstrap\bootstrap-grid.scss" />
+    <None Include="UI\general\Styles\bootstrap\bootstrap-reboot.scss" />
+    <None Include="UI\general\Styles\bootstrap\bootstrap.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_alert.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_background-variant.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_badge.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_border-radius.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_breakpoints.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_buttons.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_cards.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_clearfix.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_float.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_forms.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_gradients.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_grid-framework.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_grid.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_hover.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_image.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_list-group.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_lists.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_nav-divider.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_navbar-align.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_pagination.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_reset-text.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_resize.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_screen-reader.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_size.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_table-row.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_text-emphasis.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_text-hide.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_text-truncate.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_transforms.scss" />
+    <None Include="UI\general\Styles\bootstrap\mixins\_visibility.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_align.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_background.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_borders.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_clearfix.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_display.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_flex.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_float.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_position.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_screenreaders.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_sizing.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_spacing.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_text.scss" />
+    <None Include="UI\general\Styles\bootstrap\utilities\_visibility.scss" />
+    <None Include="UI\general\Styles\bootstrap\_alert.scss" />
+    <None Include="UI\general\Styles\bootstrap\_badge.scss" />
+    <None Include="UI\general\Styles\bootstrap\_breadcrumb.scss" />
+    <None Include="UI\general\Styles\bootstrap\_button-group.scss" />
+    <None Include="UI\general\Styles\bootstrap\_buttons.scss" />
+    <None Include="UI\general\Styles\bootstrap\_card.scss" />
+    <None Include="UI\general\Styles\bootstrap\_carousel.scss" />
+    <None Include="UI\general\Styles\bootstrap\_close.scss" />
+    <None Include="UI\general\Styles\bootstrap\_code.scss" />
+    <None Include="UI\general\Styles\bootstrap\_custom-forms.scss" />
+    <None Include="UI\general\Styles\bootstrap\_custom.scss" />
+    <None Include="UI\general\Styles\bootstrap\_dropdown.scss" />
+    <None Include="UI\general\Styles\bootstrap\_forms.scss" />
+    <None Include="UI\general\Styles\bootstrap\_grid.scss" />
+    <None Include="UI\general\Styles\bootstrap\_images.scss" />
+    <None Include="UI\general\Styles\bootstrap\_input-group.scss" />
+    <None Include="UI\general\Styles\bootstrap\_jumbotron.scss" />
+    <None Include="UI\general\Styles\bootstrap\_list-group.scss" />
+    <None Include="UI\general\Styles\bootstrap\_media.scss" />
+    <None Include="UI\general\Styles\bootstrap\_mixins.scss" />
+    <None Include="UI\general\Styles\bootstrap\_modal.scss" />
+    <None Include="UI\general\Styles\bootstrap\_nav.scss" />
+    <None Include="UI\general\Styles\bootstrap\_navbar.scss" />
+    <None Include="UI\general\Styles\bootstrap\_normalize.scss" />
+    <None Include="UI\general\Styles\bootstrap\_pagination.scss" />
+    <None Include="UI\general\Styles\bootstrap\_popover.scss" />
+    <None Include="UI\general\Styles\bootstrap\_print.scss" />
+    <None Include="UI\general\Styles\bootstrap\_progress.scss" />
+    <None Include="UI\general\Styles\bootstrap\_reboot.scss" />
+    <None Include="UI\general\Styles\bootstrap\_responsive-embed.scss" />
+    <None Include="UI\general\Styles\bootstrap\_tables.scss" />
+    <None Include="UI\general\Styles\bootstrap\_tooltip.scss" />
+    <None Include="UI\general\Styles\bootstrap\_transitions.scss" />
+    <None Include="UI\general\Styles\bootstrap\_type.scss" />
+    <None Include="UI\general\Styles\bootstrap\_utilities.scss" />
+    <None Include="UI\general\Styles\bootstrap\_variables.scss" />
+    <None Include="packages.config" />
+    <None Include="UI\general\Scripts\jquery-3.1.1.min.map" />
+    <None Include="UI\general\Scripts\jquery-3.1.1.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configs\database.xml" />
+    <Content Include="Configs\server.xml" />
+    <Content Include="Gruntfile.js" />
+    <Content Include="Lib\Hud\InfoHud.js" />
+    <Content Include="Lib\Trainer\trainer\player.js" />
+    <Content Include="Lib\Trainer\trainer\trainer.js" />
+    <Content Include="Lib\Trainer\trainer\vehicles.js" />
+    <Content Include="Lib\Trainer\trainer\weapons.js" />
+    <Content Include="Lib\User\Management\UI\PayDayUI.js" />
+    <Content Include="Lib\User\StartUp\PlayerConnection_Client.js" />
+    <Content Include="Lib\User\StartUp\PlayerConnection_Login_Client.js" />
+    <Content Include="Lib\User\StartUp\PlayerConnection_Register_Client.js" />
+    <Content Include="Lib\VehicleOptions\engine\Client\engine.js" />
+    <Content Include="Lib\VehicleOptions\images\vehicle.png" />
+    <Content Include="Lib\VehicleOptions\images\vehicledmgicon.png" />
+    <Content Include="Lib\VehicleOptions\images\vehiclefuelicon.png" />
+    <Content Include="Lib\VehicleOptions\images\vehiclespeedicon.png" />
+    <Content Include="Lib\VehicleOptions\speed\Client\speed.js" />
+    <Content Include="Lib\VehicleOptions\vehOpt\Client\vehicleFuel.js" />
+    <Content Include="Lib\VehicleOptions\vehOpt\Client\vehicleHP.js" />
+    <Content Include="meta.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UI\custom\Images\logo.png" />
+    <Content Include="UI\custom\clipboard.js" />
+    <Content Include="UI\custom\styles.css" />
+    <Content Include="UI\general\Scripts\bootstrap.js" />
+    <Content Include="UI\general\Scripts\bootstrap.min.js" />
+    <Content Include="UI\general\Scripts\fingerprint2.min.js" />
+    <Content Include="UI\general\Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="UI\general\Scripts\jquery-3.1.1.js" />
+    <Content Include="UI\general\Scripts\jquery-3.1.1.min.js" />
+    <Content Include="UI\general\Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="UI\general\Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Sqls\Install.sql" />
+    <Content Include="UI\general\Styles\bootstrap\bootstrap.css" />
+    <Content Include="UI\PayDay-Calculation.html" />
+    <Content Include="UI\Register_Login_Profile\GetFingerprint.html" />
+    <Content Include="UI\Register_Login_Profile\Login.html" />
+    <Content Include="UI\Register_Login_Profile\Register.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.11.0.1761\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.11.0.1761\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.11.0.1761\analyzers\SonarAnalyzer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="types-gt-mp\Declarations.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Client.GUI.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Client.Javascript.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Client.Javascript.ScriptContext.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Client.Misc.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Client.Sound.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Client.Streamer.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Client.Sync.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Client.Util.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Shared.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GrandTheftMultiplayer.Shared.Math.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GTA.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GTA.Math.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GTA.Native.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GTA.NaturalMotion.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\GTA.UI.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\index.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\Microsoft.ClearScript.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\NativeUI.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\NativeUI.UIMenu.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\NativeUI.UIMenuItem.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\NativeUI.UIResText.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\System.Collections.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\System.Collections.Generic.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\System.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\System.Drawing.d.ts" />
+    <TypeScriptCompile Include="types-gt-mp\System.Windows.Forms.d.ts" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>npm install &amp;&amp; npm run-script build</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>IF EXIST $(ProjectDir)..\..\Server (
+rmdir  /S /Q "$(ProjectDir)..\..\Server\resources/TerraTex-RL-RPG" 
+xcopy /S /I /Y /E "$(ProjectDir)." "$(ProjectDir)..\..\Server\resources/TerraTex-RL-RPG"
+)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

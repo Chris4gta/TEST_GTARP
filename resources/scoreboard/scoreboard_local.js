@@ -52,7 +52,7 @@ API.onUpdate.connect(function(s,e) {
 
 		API.drawRectangle(startX, startY + 40, totalWidth, 40, 50, 50, 50, 200);
 		API.drawText(API.getPlayerName(API.getLocalPlayer()), startX + 10, startY + 45, 0.4, 255, 255, 255, 255, 4, 0, false, true, 0);
-
+		
 		currentCW = 0;
 		for (var j = 0; j < columnList.Count; j++) {
 			var columnData = API.getEntitySyncedData(API.getLocalPlayer(), columnList[j]);

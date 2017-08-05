@@ -1,0 +1,15 @@
+{
+  "name": "terratex-rl-rpg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/grunt.cmd"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-sass": "^2.0.0"
+  }
+}

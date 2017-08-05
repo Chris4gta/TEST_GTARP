@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Registration</title>
+    <script src="../general/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="../general/Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../general/Styles/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="../custom/styles.css"/>
+</head>
+<body>
+<div class="container-fluid">
+    <form role="form" onsubmit="executeFormCheck(); return false;">
+        <div class="form-control">
+            <h3>>Willkommen auf dem 2nd Life GTA Roleplay Game Server</h3>
+            <img src="../custom/Images/logo.png" class="register-image-logo"/>Willkommen auf dem Server. Unter deinem Pseudonym <b>"<span data-insert="nickname">${nickname}</span>"</b> wurde noch kein Account gefunden. Mit diesem Formular kannst du ein neuen Account und einen neuen
+            Character erstellen. Da wir im wesentlichen ein RPG Server sind, solltest du dir einen Character ausdenken, den es im realen wirklich geben könnte und mit
+            dem du dich indentifizieren kannst. Im Abschnitt "Character Daten" werden auch nur Daten zum Character abgefragt. Diese müssen nicht mit deinen realen Daten übereinstimmen.
+            <div class="clear"></div>
+        </div>
+        <div class="form-control">
+            <h3>Account Daten</h3>
+            <div class="form-group">
+                <label for="email" class="font-weight-bold">E-Mail</label>
+                <input type="email" class="form-control" id="email" placeholder="E-Mail" required>
+                <br/><small>
+                    Bitte gebe hier eine real existierende E-Mail Adresse ein. Unter dieser solltest du auch in Zukunft erreichbar sein. Sie wird zur Identifikation
+                    bei Moderativen Hilfen genutzt und du wirst sie ggf. auch in Zukunft benötigen, solltest du beispielsweise mal dein Passwort vergessen. Wir werden die E-Mail
+                    nicht für andere Zwecke (wie Werbung) nutzen. Sie wird nur zu deinen Gunsten gespeichert.
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="password" class="font-weight-bold">Passwort</label>
+                <input type="password" class="form-control" id="password" placeholder="Passwort" required>
+                <input type="password" class="form-control" id="passwordwdh" placeholder="Passwort wiederholen" required>
+                <span id="worngPassword" class="hidden text-danger">
+                    <small>Die Passwörter stimmen nicht überein oder entsprechen nicht den Passwortrichtlinien (min. 8 Zeichen)</small>
+                </span>
+            </div>
+        </div>
+        <div class="form-control">
+            <h3>(Roleplay-) Character Daten</h3>
+            <div class="form-group">
+                <label for="forename" class="font-weight-bold">Vorname</label>
+                <input type="text" class="form-control" id="forename" placeholder="Vorname" required>
+            </div>
+            <div class="form-group">
+                <label for="lastname" class="font-weight-bold">Nachname</label>
+                <input type="text" class="form-control" id="lastname" placeholder="Nachname" required>
+            </div>
+            <div class="form-group">
+                <label for="birthday" class="font-weight-bold">Geburstag</label>
+                <input type="date" class="form-control" id="birthday" placeholder="Geburstag dd.mm.YYYY" required>
+                <span id="worngBirthday" class="hidden text-danger">
+                    <small>Bitte gebe ein realistisches Geburtsjahr deines Characters an.</small>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="gender" class="font-weight-bold">Geschlecht</label><br/>
+
+                <label class="custom-control custom-radio">
+                    <input id="gender_female" name="gender" type="radio" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Weiblich</span>
+                </label>
+                <label class="custom-control custom-radio">
+                    <input id="gender_male" name="gender" type="radio" class="custom-control-input" checked>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Männlich</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="history" class="font-weight-bold">Charactergeschichte (optional)</label><br/>
+                <small>
+                    Hier kannst du für einen Character eine coole kleine Geschichte ausdenken, z.B. wo kommt dein Character her, was macht ihn aus, welche Charactereigenschaften
+                    hat er, was willst du mit ihm erreichen oder ähnliches. Du solltest diese Geschichte auch aus sicht des Characters (Ich - Perspektive) schreiben oder Alternativ
+                    in 3rd Person. Beispiel: "Max Mustermann hatte alles verloren und so blieb ihn nichts. In diesen Moment entschloss er sich aus dem Land zu fliehen und
+                    floh nach TerraTex. Dort...."
+                </small>
+                <br/>
+                <br/>
+                <textarea class="form-control" id="history" height="150px" placeholder="Charactergeschichte"></textarea>
+            </div>
+        </div>
+        <div class="form-control">
+            <button type="submit" class="btn btn-primary">Account & Character erstellen</button>
+        </div>
+    </form>
+    
+    <script>
+        
+        $(document).ready(function () {
+            resourceCall("sendMeNickname");
+        });
+
+        function setPlayerNickname(nickname) {
+            $("span[data-insert=nickname]").html(nickname);
+        }
+
+        function executeFormCheck() {
+            //check password
+            if ($("#password").val() !== $("#passwordwdh").val() || $("#password").val().length < 8) {
+                $("#worngPassword").removeClass("hidden");
+                $("#password").css("border-color", "#FF0000");
+                $("#passwordwdh").css("border-color", "#FF0000");
+                $('html, body').animate({
+                    scrollTop: $("#password").offset().top
+                }, 200);
+                return false;
+            } else {
+                $("#worngPassword").addClass("hidden");
+                $("#password").css("border-color", "rgba(0, 0, 0, 0.15)");
+                $("#passwordwdh").css("border-color", "rgba(0, 0, 0, 0.15)");
+            }
+
+            // check birthday
+            const birthday = new Date($("#birthday").val());
+            if (birthday.getFullYear() > new Date().getFullYear() || birthday.getFullYear() < 1917) {
+                $("#worngBirthday").removeClass("hidden");
+                $("#birthday").css("border-color", "#FF0000");
+                $('html, body').animate({
+                    scrollTop: $("#birthday").offset().top
+                }, 200);
+                return false;
+            } else {
+                $("#worngBirthday").addClass("hidden");
+                $("#birthday").css("border-color", "rgba(0, 0, 0, 0.15)");
+            }
+
+            // objects and arrays cause sometimes problems: workaround -> JSON.stringify
+            resourceCall("sendRegistration", JSON.stringify({
+                password: $("#password").val(),
+                email: $("#email").val(),
+                forename: $("#forename").val(),
+                lastname: $("#lastname").val(),
+                birthday: $("#birthday").val(),
+                history: $("#history").val(),
+                gender: $("#gender_female").is(":checked") ? "female" : "male"
+            }));
+        }
+    </script>
+</div>
+</body>
+</html>

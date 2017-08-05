@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2ndLifeGTARPG", "TerraTex-RL-RPG\2ndLifeGTARPG.csproj", "{385EE243-0DD0-4FBF-9D33-376E50520874}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2ndLifeGTARPG", "2ndLifeGTARPG\2ndLifeGTARPG.csproj", "{385EE243-0DD0-4FBF-9D33-376E50520874}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{1B8F2EF5-A4DA-4AC2-8010-365667F508BF}"
 	ProjectSection(SolutionItems) = preProject
