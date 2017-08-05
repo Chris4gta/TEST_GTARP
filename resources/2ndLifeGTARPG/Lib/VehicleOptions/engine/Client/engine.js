@@ -2,6 +2,7 @@ var g_menu = API.createMenu("Fahrzeug", "Subtitle", 0, 0, 6);
 var player;
 var inVeh;
 var EngineStatusOn;
+var currentVehicleFuel;
 g_menu.AddItem(API.createMenuItem("Motor einschalten " , "Das Fahrzeug wird gestartet"));
 g_menu.AddItem(API.createMenuItem("Motor ausschalten " , "Das Fahrzeug wird gestoppt"));
 
@@ -12,8 +13,9 @@ g_menu.OnItemSelect.connect(function(sender, item, index) {
 	var inVeh = API.isPlayerInAnyVehicle(player);
 	var bEngineStatus;
 	var veh = API.getPlayerVehicle(player);
+	API.triggerServerEvent("GET_VEHICLE_FUEL");
 	if (inVeh){
-		if (index==0){
+		if (index==0 && currentVehicleFuel > 0){
 			bEngineStatus = true;
 			API.setVehicleEngineStatus(veh, bEngineStatus);
 			g_menu.Visible = false;
@@ -26,8 +28,15 @@ g_menu.OnItemSelect.connect(function(sender, item, index) {
 		API.sendNotification("Spieler nicht im Fahrzeug.");
 		
 	}
-	API.triggerServerEvent("ENGINE_STATUS", veh, bEngineStatus );
+	API.triggerServerEvent("ENGINE_STATUS", bEngineStatus );
 	
+});
+
+API.onServerEventTrigger.connect(function (eventName, args) {
+	if (eventName == "SEND_VEHICLE_FUEL"){
+		currentVehicleFuel = args[0];
+	}
+	  
 });
 
 API.onKeyDown.connect(function(sender, e) {

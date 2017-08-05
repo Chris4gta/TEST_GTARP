@@ -22,98 +22,75 @@ public class VehicleFuelScript : Script
 	public NetHandle svehicle;
 	bool sEngineStatus;
 	public double fuelIntervall = 3;
-    private int Anzeige;
-	public VehicleFuelScript()
+    private int VehicleID { get; set; }
+    public Vehicle veh;
+    public Dictionary<Client, List<NetHandle>> VehicleList = new Dictionary<Client, List<NetHandle>>();
+    public Dictionary<NetHandle, double> FuelList = new Dictionary<NetHandle, double>();
+
+    public VehicleFuelScript()
 	{
-		API.onUpdate += OnUpdateHandler;
 		API.onPlayerEnterVehicle += OnPlayerEnterVehicle;
-	}
+        API.onClientEventTrigger += OnClientEvent;
+    }
 
-    public VehicleFuelScript(double fuel)
+    public VehicleFuelScript(int vehicleID, Client sender, int model)
     {
-
-        Fuel = fuel;
-        Anzeige = Anzeige + 1;
-        API.sendChatMessageToAll(Anzeige.ToString());
+        VehicleID = vehicleID;
+        var rot = API.getEntityRotation(sender.handle);
+        veh = API.createVehicle((VehicleHash)model, sender.position, new Vector3(0, 0, rot.Z), 0, 0);
     }
 
-    public VehicleFuelScript( double fuel, NetHandle vehicle){
-    
-		Fuel = fuel;
-		
-    }
-	
-	private void OnPlayerEnterVehicle(Client player, NetHandle vehicle)
+    public void OnClientEvent(Client player, string eventName, params object[] args) //arguments param can contain multiple params
     {
-		netVehicle = "veh_"+vehicle.ToString();
-	
-		bool ItemFound = VehicleCars.Contains(netVehicle);
-		
-		
-		VehicleFuelScript vfs = new VehicleFuelScript( 100, vehicle);
-		
-		if (!ItemFound){
-			VehicleCars.Add(netVehicle+","+this.Fuel.ToString());
-			//API.sendChatMessageToAll(netVehicle+",100");
-		}
-		
-		oldSeconds = SetOldSeconds();
-		
-		this.sPlayer = player;
-		this.svehicle = vehicle;
-		API.triggerClientEvent(player, "update_fuel_client", this.Fuel);
+        NetHandle vehicle = API.getPlayerVehicle(player);
+        if (eventName == "UPDATE_FUEL")
+        {
+            
+            double CurrentTank;
+
+
+            for (int i = FuelList.Count - 1; i >= 0; i--)
+            {
+                var item = FuelList.ElementAt(i);
+                var itemKey = item.Key;
+                var itemValue = item.Value;
+                bool EngineStatus = API.getVehicleEngineStatus(itemKey);
+                API.sendChatMessageToAll("Motor an " + EngineStatus);
+                if (EngineStatus)
+                {
+                    CurrentTank = FuelList.Get(itemKey);
+                    CurrentTank = CurrentTank - 1;
+                        
+                    if (CurrentTank <= 0)
+                    {
+                        CurrentTank = 0;
+                        API.setVehicleEngineStatus(itemKey, false);
+                    }
+                    API.sendChatMessageToAll("FahrzeugID " + itemKey + " Tank " + itemValue);
+                    FuelList.Set(itemKey, CurrentTank);
+
+                    if (API.isPlayerInAnyVehicle(player))
+                    {
+                        API.triggerClientEvent(player, "update_fuel_client", FuelList.Get(vehicle));
+                    }
+                }
+            }
+        }
+
+        if (eventName == "GET_VEHICLE_FUEL")
+        {
+            API.triggerClientEvent(player, "SEND_VEHICLE_FUEL", FuelList.Get(vehicle));
+        }
+    }
+
+    private void OnPlayerEnterVehicle(Client sender, NetHandle vehicle)
+    {
+        if (!FuelList.ContainsKey( vehicle ))
+        {
+            FuelList.Add(vehicle, Fuel);
+            API.sendChatMessageToAll("Auto zur Liste hinzugefügt.");
+        }
+		API.triggerClientEvent(sender, "update_fuel_client", FuelList.Get(vehicle));
     }
 	
-	private void GetFuelFromList(List < string > vehListe){
-		
-	}
-	
-	public void OnUpdateHandler(){ 			
-		bool EngineStatus;
-		if(sPlayer != null){
-			EngineStatus = API.getVehicleEngineStatus(this.svehicle);
-			if(this.sEngineStatus != EngineStatus){
-				oldSeconds = SetOldSeconds();
-				this.sEngineStatus = EngineStatus;
-			}
-			if(this.sEngineStatus){
-				FuelTimer();
-			}
-		}
-	}
-	
-	public void FuelTimer(){
-		int seconds; 	
-
-		DateTime dt = DateTime.Now; 
-		seconds = dt.Minute; 
-		
-		if (oldSeconds == seconds){
-			oldSeconds = seconds + 1;
-			UpdateFuel();
-		}else if(oldSeconds == 60){
-			oldSeconds = 0;
-		}else if(oldSeconds == 61){
-			oldSeconds = 1;
-		}
-	}
-
-	private void UpdateFuel(){
-		this.Fuel = this.Fuel - fuelIntervall;
-		if(this.Fuel == 0){
-			API.setVehicleEngineStatus(this.svehicle, false);	
-		}
-		API.consoleOutput(this.Fuel.ToString());
-		API.triggerClientEvent(this.sPlayer, "update_fuel_client", this.Fuel);
-	}
-	
-	private int SetOldSeconds(){
-		DateTime odt = DateTime.Now; 
-		oldSeconds = odt.Minute;
-		oldSeconds = oldSeconds + 1;
-		return oldSeconds;
-	}
-	
-
-
 }

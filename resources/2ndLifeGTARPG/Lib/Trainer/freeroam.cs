@@ -78,14 +78,17 @@ public class FreeroamScript : Script
             if (!Enum.IsDefined(typeof(VehicleHash), model))
                 return;
             
-            var rot = API.getEntityRotation(sender.handle);
-            var veh = API.createVehicle((VehicleHash)model, sender.position, new Vector3(0, 0, rot.Z), 0, 0);
-            VehicleFuelScript vfs = new VehicleFuelScript(100);
+            //var rot = API.getEntityRotation(sender.handle);
+            //var veh = API.createVehicle((VehicleHash)model, sender.position, new Vector3(0, 0, rot.Z), 0, 0);
+            NetHandle Vehicle = API.getPlayerVehicle(sender);
+            int VehicleID = Vehicle.Value;
+            VehicleFuelScript vfs = new VehicleFuelScript(VehicleID, sender, model);
+            
             
 
             if (VehicleHistory.ContainsKey(sender))
             {
-                VehicleHistory[sender].Add(veh);
+                VehicleHistory[sender].Add(vfs.veh);
                 if (VehicleHistory[sender].Count > 3)
                 {
                     API.deleteEntity(VehicleHistory[sender][0]);
@@ -94,10 +97,10 @@ public class FreeroamScript : Script
             }
             else
             {
-                VehicleHistory.Add(sender, new List<NetHandle> { veh });
+                VehicleHistory.Add(sender, new List<NetHandle> { vfs.veh });
             }
             
-            API.setPlayerIntoVehicle(sender, veh, -1);        
+            API.setPlayerIntoVehicle(sender, vfs.veh, -1);        
         }
         else if (name == "REQUEST_WEAPON")
         {

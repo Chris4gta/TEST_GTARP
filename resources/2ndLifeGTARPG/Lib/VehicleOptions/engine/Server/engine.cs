@@ -19,12 +19,11 @@ public class EngineScript : Script
 
     public void onClientEventTrigger(Client sender, string name, object[] args)
     {
-        if (name == "ENGINE_STATUS"){
+        if (name == "ENGINE_STATUS")
+        {
+			bool bEngineStatus = (bool)args[0];
 			
-			NetHandle veh = (NetHandle)args[0];
-			bool bEngineStatus = (bool)args[1];
-			
-			API.setVehicleEngineStatus(veh, bEngineStatus);		
+			API.setVehicleEngineStatus(API.getPlayerVehicle(sender), bEngineStatus);		
 			
 		}
 	}
