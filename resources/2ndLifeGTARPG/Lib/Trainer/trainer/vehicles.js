@@ -21,11 +21,11 @@ API.onResourceStart.connect(function (sender, e) {
 	vehiclesWindow.RefreshIndex();
 });
 
-function addVehicleItem(gun, hash) {
-	var suicide = API.createMenuItem(gun, "");
+function addVehicleItem(vehicle, hash) {
+	var suicide = API.createMenuItem(vehicle, "");
 
 	suicide.Activated.connect(function (menu, item) {
-		API.triggerServerEvent("CREATE_NEW_VEHICLE", hash);
+		API.triggerServerEvent("CREATE_VEHICLE", hash);
 	});
 
 	return suicide;
