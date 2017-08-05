@@ -1,0 +1,11 @@
+2017-08-05 03:01:00.0016 |  Info | VehicleFuelScript | 88 
+2017-08-05 03:01:00.0016 |  Info | VehicleFuelScript | 88 
+2017-08-05 03:01:21.6572 | Debug | GameServer | Announcing self to master server... 
+2017-08-05 03:02:00.0057 |  Info | VehicleFuelScript | 85 
+2017-08-05 03:02:00.0057 |  Info | VehicleFuelScript | 85 
+2017-08-05 03:02:39.1275 |  Info | Program | Terminating... 
+2017-08-05 03:02:39.1440 |  Info | GameServer | Stopping TerraTex-RL-RPG 
+2017-08-05 03:02:39.3367 |  Info | GameServer | Stopped TerraTex-RL-RPG. 
+2017-08-05 03:02:39.3367 |  Info | GameServer | Stopping scoreboard 
+2017-08-05 03:02:39.3587 |  Info | GameServer | Stopped scoreboard. 
+2017-08-05 03:02:39.3782 |  Info | Program | Server stopped. 
