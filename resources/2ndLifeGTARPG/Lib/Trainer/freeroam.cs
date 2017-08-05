@@ -14,7 +14,7 @@ public class FreeroamScript : Script
 	
     public FreeroamScript()
     {
-		
+        
         API.onClientEventTrigger += onClientEventTrigger;
     }
 
@@ -80,6 +80,8 @@ public class FreeroamScript : Script
             
             var rot = API.getEntityRotation(sender.handle);
             var veh = API.createVehicle((VehicleHash)model, sender.position, new Vector3(0, 0, rot.Z), 0, 0);
+            VehicleFuelScript vfs = new VehicleFuelScript(100);
+            
 
             if (VehicleHistory.ContainsKey(sender))
             {

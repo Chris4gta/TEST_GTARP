@@ -22,12 +22,21 @@ public class VehicleFuelScript : Script
 	public NetHandle svehicle;
 	bool sEngineStatus;
 	public double fuelIntervall = 3;
+    private int Anzeige;
 	public VehicleFuelScript()
 	{
 		API.onUpdate += OnUpdateHandler;
 		API.onPlayerEnterVehicle += OnPlayerEnterVehicle;
 	}
-	
+
+    public VehicleFuelScript(double fuel)
+    {
+
+        Fuel = fuel;
+        Anzeige = Anzeige + 1;
+        API.sendChatMessageToAll(Anzeige.ToString());
+    }
+
     public VehicleFuelScript( double fuel, NetHandle vehicle){
     
 		Fuel = fuel;
