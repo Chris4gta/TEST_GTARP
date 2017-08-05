@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <servername>GTA RP Test CP</servername>
+  <servername>2nd Life GTA RPG - Entwicklung</servername>
   <serverport>4499</serverport>
   <maxplayers>50</maxplayers>
   <minclientversion>0.0.0.0</minclientversion>
@@ -17,7 +17,7 @@
   <vehicle_lagcomp>true</vehicle_lagcomp>
   <onfoot_lagcomp>true</onfoot_lagcomp>
   <refresh_rate>120</refresh_rate>
-  <resource src="TerraTex-RL-RPG" />
+  <resource src="2ndLifeGTARPG" />
   <announce_lan>true</announce_lan>
   <upnp>false</upnp>
   <fqdn></fqdn>
