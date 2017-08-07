@@ -122,13 +122,13 @@ namespace GTFuel
             }
             if (eventName == "GET_RPM")
             {
-                float vehicleRPM = (float)args[0];
-                float vehicleSpeed = (float)args[1];
+                //float vehicleRPM = (float)args[0];
+                //float vehicleSpeed = (float)args[1];
                 bool isJumpPressed = (bool)args[2];
                 RenderUI(player);
 
                 //API.sendChatMessageToAll(""+ vehicleSpeed + "");
-                ConsumeFuel(player.vehicle, 10f, 10f, isJumpPressed, player, API.getPlayerVehicle(player));
+                ConsumeFuel(player.vehicle, 1f, 1f, isJumpPressed, player, API.getPlayerVehicle(player));
                 
             }
 
@@ -263,6 +263,7 @@ namespace GTFuel
                 fuel = fuel < 0f ? 0f : fuel;
                 
                 FuelList.Set(NetVehicle, fuel);
+                API.sendChatMessageToAll("Consuming");
                 API.triggerClientEvent(player, "update_fuel_client", FuelList.Get(player.vehicle));
             }
            
