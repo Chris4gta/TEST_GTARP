@@ -123,7 +123,7 @@ namespace GTFuel
             if (eventName == "GET_RPM")
             {
                 //float vehicleRPM = (float)args[0];
-                //float vehicleSpeed = (float)args[1];
+                //int vehicleSpeed = (int)args[1];
                 bool isJumpPressed = (bool)args[2];
                 RenderUI(player);
 
@@ -250,20 +250,27 @@ namespace GTFuel
         {
 
             float fuel = FuelList.Get(NetVehicle);
+            float VehConsum = GetVehicleConsume(vehicle);
             
             // Consuming
             if (fuel > 0 && vehicle.engineStatus)
             {
-                float normalizedRPMValue = (float)Math.Pow(vehicleRPM, 1.5);
-
+                float normalizedRPMValue = (float)Math.Pow(VehConsum, 1.5);
+                
                 fuel -= normalizedRPMValue * fuelRPMImpact;
-                fuel -= vehicleSpeed * fuelAccelerationImpact;
+                //fuel -= vehicleSpeed * fuelAccelerationImpact;
                 fuel -= vehicle.maxTraction * fuelTractionImpact;
-
+                
                 fuel = fuel < 0f ? 0f : fuel;
                 
                 FuelList.Set(NetVehicle, fuel);
-                API.sendChatMessageToAll("Consuming");
+
+                if (fuel <= 0f)
+                {
+                    fuel = 0f;
+                    API.setVehicleEngineStatus(NetVehicle, false);
+                }
+
                 API.triggerClientEvent(player, "update_fuel_client", FuelList.Get(player.vehicle));
             }
            
@@ -369,6 +376,28 @@ namespace GTFuel
 
             API.sendChatMessageToAll("Vehicle is null");
             return 65f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns></returns>
+        public float GetVehicleConsume(Vehicle vehicle)
+        {
+            if (vehicle != null)
+            {
+                if (VehiclesPetrolTanks.Has(vehicle))
+                {
+                    return VehiclesPetrolTanks.Get(vehicle);
+                }
+                else
+                {
+                    return 5f;
+                }
+            }
+
+            return 5f;
         }
 
     }

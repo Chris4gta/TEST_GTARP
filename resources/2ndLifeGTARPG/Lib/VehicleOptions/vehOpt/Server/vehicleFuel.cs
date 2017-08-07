@@ -92,7 +92,7 @@ namespace GTFuel
                 FuelList.Add(vehicle, Fuel);
                 //API.sendChatMessageToAll("Auto zur Liste hinzugefügt.");
             }
-            API.sendChatMessageToAll("Auto zur Liste hinzugefügt." + vehicle.ToString() + "Fuel " + Fuel.ToString());
+            //API.sendChatMessageToAll("Auto zur Liste hinzugefügt." + vehicle.ToString() + "Fuel " + Fuel.ToString());
             API.triggerClientEvent(sender, "update_fuel_client", FuelList.Get(vehicle));
         }
 
