@@ -53,6 +53,8 @@
     <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.5.0.0-beta07\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -74,6 +76,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lib\Admin\AdminChecks.cs" />
@@ -81,6 +84,9 @@
     <Compile Include="Lib\Admin\DevServerCommands.cs" />
     <Compile Include="Lib\Data\Configs.cs" />
     <Compile Include="Lib\Data\Database.cs" />
+    <Compile Include="Lib\GasStation\Fuel.cs" />
+    <Compile Include="Lib\GasStation\GasStation.cs" />
+    <Compile Include="Lib\GasStation\VehiclesPetrolTanks.cs" />
     <Compile Include="Lib\Helper\LoadedDie.cs" />
     <Compile Include="Lib\Helper\Password.cs" />
     <Compile Include="Lib\Helper\Player.cs" />
@@ -198,6 +204,9 @@
     <Content Include="Configs\database.xml" />
     <Content Include="Configs\server.xml" />
     <Content Include="Gruntfile.js" />
+    <Content Include="Lib\GasStation\GasStation.js">
+      <Generator>MSBuild:Compile</Generator>
+    </Content>
     <Content Include="Lib\Hud\InfoHud.js" />
     <Content Include="Lib\Trainer\trainer\player.js" />
     <Content Include="Lib\Trainer\trainer\trainer.js" />

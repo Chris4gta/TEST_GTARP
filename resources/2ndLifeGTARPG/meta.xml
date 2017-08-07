@@ -31,6 +31,8 @@
 	<file src="Lib/VehicleOptions/images/vehiclefuelicon.png" />
 	<file src="Lib/VehicleOptions/images/vehiclespeedicon.png" />
 	
+	<!-- Gas Station -->
+	<script src="Lib/GasStation/GasStation.js" type="client" />	
 	
 	<!-- UI Stuff-->
     <file src="UI/custom/styles.css" />

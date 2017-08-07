@@ -20,6 +20,9 @@ API.onUpdate.connect(function() {
 	if (inVeh) {
 		API.dxDrawTexture("Lib/VehicleOptions/images/vehiclespeedicon.png", new Point(res_X -160, 500), new Size(50, 50), 0.0);
 		API.drawText("" + (speed * 3.6).toFixed() +" km/h", res_X - 15, 500, 0.5, 255, 255, 255, 255, 4, 2, false, true, 0);
+		speed = speed * 3.6;
+		API.triggerServerEvent("GET_RPM", rpm, (speed).toFixed(), API.isControlPressed(22) );
+		//API.sendChatMessage(""+ rpm + "");
 	}
 	
 });

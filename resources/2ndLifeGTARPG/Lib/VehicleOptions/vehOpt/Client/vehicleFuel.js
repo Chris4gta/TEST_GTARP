@@ -20,12 +20,23 @@ API.onServerEventTrigger.connect(function (eventName, args) {
 
 API.onUpdate.connect(function (sender, e) {
 	var date = new Date();
-	var secTimer;;
+	var secTimer;
+	var intervall = 0;
 	seconds = date.getSeconds();
 	player = API.getLocalPlayer();
 	inVeh = API.isPlayerInAnyVehicle(player);
 	veh = API.getPlayerVehicle(player);
-	
+
+
+	/*TimeMatch =  seconds;
+	intervall = 20;
+	TimeMatch = TimeMatch - intervall;
+
+	if (TimeMatch < 0)
+	{	
+		TimeMatch = TimeMatch + 60;
+	}
+	*/
 	if(TimeMatch == seconds){
 		TimeMatch = seconds - 1;
 		API.triggerServerEvent("UPDATE_FUEL");

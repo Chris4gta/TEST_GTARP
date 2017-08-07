@@ -18,7 +18,7 @@ public class VehicleHPScript : Script
     }
 	public int currentVehicleHP;	
 	
-	private void SetCurrentVehicleHP(NetHandle vehicle, float vehicleHP){
+	private void setVehicleHealth(NetHandle vehicle, float vehicleHP){
 		API.setVehicleHealth(vehicle, vehicleHP);
 	}
 	
