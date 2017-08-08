@@ -90,6 +90,7 @@
     <Compile Include="Lib\Helper\LoadedDie.cs" />
     <Compile Include="Lib\Helper\Password.cs" />
     <Compile Include="Lib\Helper\Player.cs" />
+    <Compile Include="Lib\spawner\Server\Main.cs" />
     <Compile Include="Lib\Threads\UpdatePlayerPlayTime.cs" />
     <Compile Include="Lib\Threads\UpdateWeather.cs" />
     <Compile Include="Lib\Trainer\freeroam.cs" />
@@ -208,6 +209,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Content>
     <Content Include="Lib\Hud\InfoHud.js" />
+    <Content Include="Lib\spawner\Client\main.js" />
+    <Content Include="Lib\spawner\Client\vehiclesModels.js" />
     <Content Include="Lib\Trainer\trainer\player.js" />
     <Content Include="Lib\Trainer\trainer\trainer.js" />
     <Content Include="Lib\Trainer\trainer\vehicles.js" />

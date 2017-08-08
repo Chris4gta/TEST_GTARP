@@ -34,6 +34,10 @@
 	<!-- Gas Station -->
 	<script src="Lib/GasStation/GasStation.js" type="client" />	
 	
+	<!-- Spawner -->
+	<script src="Lib/spawner/Client/vehiclesModels.js" type="client" />
+    <script src="Lib/spawner/Client/main.js" type="client" />
+	
 	<!-- UI Stuff-->
     <file src="UI/custom/styles.css" />
     <file src="UI/custom/clipboard.js" />

@@ -10,9 +10,11 @@ g_menu.AddItem(API.createMenuItem("Motor ausschalten " , "Das Fahrzeug wird gest
 g_menu.OnItemSelect.connect(function(sender, item, index) {
 	API.showCursor(false);	
 	g_menu.Visible = true;
-	var inVeh = API.isPlayerInAnyVehicle(player);
-	var bEngineStatus;
 	var veh = API.getPlayerVehicle(player);
+	var inVeh = API.isPlayerInAnyVehicle(player);
+	var bEngineStatus = API.getVehicleEngineStatus(veh);
+	
+	
 	API.triggerServerEvent("GET_VEHICLE_FUEL");
 	if (inVeh){
 		if (index==0 && currentVehicleFuel > 0){
@@ -40,9 +42,22 @@ API.onServerEventTrigger.connect(function (eventName, args) {
 });
 
 API.onKeyDown.connect(function(sender, e) {
+	var veh = API.getPlayerVehicle(player);
+	var inVeh = API.isPlayerInAnyVehicle(player);
+	var bEngineStatus = API.getVehicleEngineStatus(veh);
 	if (inVeh){
-		if (e.KeyCode === Keys.K) {
-			g_menu.Visible = !g_menu.Visible;
+		if (e.KeyCode === Keys.M ) {
+			//g_menu.Visible = !g_menu.Visible;
+			if (bEngineStatus){
+				bEngineStatus = false;
+				API.setVehicleEngineStatus(veh, bEngineStatus);
+				API.sendNotification("Motor wurde ausgeschaltet.");
+			}else{
+				bEngineStatus = true;
+				API.setVehicleEngineStatus(veh, bEngineStatus);
+				API.sendNotification("Motor wurde eingeschaltet.");
+			}
+			API.triggerServerEvent("ENGINE_STATUS", bEngineStatus );
 		}
 	}
 });

@@ -33,5 +33,20 @@ function addVehicleItem(vehicle, hash) {
 
 
 API.onUpdate.connect(function (s, e) {
+
+	var player = API.getLocalPlayer();
+	var inVeh = API.isPlayerInAnyVehicle(player);
 	
+
+	if (inVeh) {
+		var car = API.getPlayerVehicle(player);
+		var health = API.getVehicleHealth(car);
+		var rpm = API.getVehicleRPM(car);
+		var velocity = API.getEntityVelocity(car);
+		var speed = Math.sqrt(
+			velocity.X * velocity.X +
+			velocity.Y * velocity.Y +
+			velocity.Z * velocity.Z
+			);
+	}
 })

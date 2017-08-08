@@ -20,36 +20,23 @@ API.onServerEventTrigger.connect(function (eventName, args) {
 
 API.onUpdate.connect(function (sender, e) {
 	var date = new Date();
-	var secTimer;
-	var intervall = 0;
 	seconds = date.getSeconds();
 	player = API.getLocalPlayer();
 	inVeh = API.isPlayerInAnyVehicle(player);
 	veh = API.getPlayerVehicle(player);
-
-
-	/*TimeMatch =  seconds;
-	intervall = 20;
-	TimeMatch = TimeMatch - intervall;
-
-	if (TimeMatch < 0)
-	{	
-		TimeMatch = TimeMatch + 60;
-	}
-	*/
-	if(TimeMatch == seconds){
-		TimeMatch = seconds - 1;
+	
+	if(TimeMatch != seconds){
+		TimeMatch = seconds;
 		API.triggerServerEvent("UPDATE_FUEL");
-		if (TimeMatch < 0) {
-			TimeMatch = 59;
-		}
 	}
+	
 
 
 	if (currentVehicleFuel != null && inVeh) {
 		API.dxDrawTexture("Lib/VehicleOptions/images/vehiclefuelicon.png", new Point(res_X -160, 550), new Size(50, 59), 0.0);
-        API.drawText("" + (currentVehicleFuel).toFixed() +"%", res_X - 15, 550, 0.5, 255, 255, 255, 255, 4, 2, false, true, 0);
-			
+        API.drawText("" + (currentVehicleFuel).toFixed(2) +" L", res_X - 15, 550, 0.5, 255, 255, 255, 255, 4, 2, false, true, 0);
+
+
     }
 });
 

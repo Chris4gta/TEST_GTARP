@@ -15,21 +15,7 @@ namespace GTFuel
 {
     public class Fuel : VehicleFuelScript
     {
-
-        public static string fuelLevelPropertyName = "_Fuel_Level";
-        public static string manualRefuelAnimDict = "weapon@w_sp_jerrycan";
-
-        public static string[] tankBones = new string[] {
-        "petrolcap",
-        "petroltank",
-        "petroltank_r",
-        "petroltank_l",
-        "wheel_lr",
-        };
-
-
         protected Blip[] blips;
-        protected Pickup[] pickups;
 
         protected float fuelTankCapacity = 65f;
 
@@ -39,32 +25,23 @@ namespace GTFuel
 
         public float showMarkerInRangeSquared = 250f;
 
-
-        public Random random = new Random();
-
         private int currentGasStationIndex;
-        private Vehicle lastVehicle;
 
-        protected bool currentVehicleFuelLevelInitialized = false;
-        protected bool hudActive = false;
-        protected bool refuelAllowed = true;
         protected float addedFuelCapacitor = 0f;
 
 
-        protected Vehicle LastVehicle { get => lastVehicle; set => lastVehicle = value; }
-
         public Fuel()
         {
+            API.onPlayerEnterVehicle += OnPlayerEnterVehicle;
             API.onClientEventTrigger += OnClientEvent;
 
 
             blips = new Blip[GasStations.positions.Length];
-            pickups = new Pickup[GasStations.positions.Length];
 
             try
             {
                 CreateBlips();
-                API.sendChatMessageToAll("Blips erzeugt");
+                
             }
             catch
             {
@@ -78,14 +55,28 @@ namespace GTFuel
         public void OnClientEvent(Client player, string eventName, params object[] args ) //arguments param can contain multiple params
         {
             NetHandle vehicle = API.getPlayerVehicle(player);
+
+            if (eventName == "GET_RPM")
+            {
+                float vehicleRPM = (float)args[0];
+                float vehicleSpeed = (float)args[1];
+                bool isJumpPressed = (bool)args[2];
+                int TimeMatch = (int)args[3];
+                int seconds = (int)args[4];
+
+                RenderUI(player);
+                ConsumeFuel(player.vehicle, vehicleRPM, vehicleSpeed, isJumpPressed, player, API.getPlayerVehicle(player), TimeMatch, seconds);
+                
+            }
             if (eventName == "CAR_IS_REFUELING")
             {
                 FuelList.Set(vehicle, VehicleMaxFuelLevel(player.vehicle));
+                API.sendChatMessageToAll("Car Refuled");
                 API.triggerClientEvent(player, "update_fuel_client", FuelList.Get(vehicle));
             }
-
+            /*
             if (eventName == "UPDATE_FUEL")
-            {
+            {                
                 float CurrentTank;
 
                 for (int i = FuelList.Count - 1; i >= 0; i--)
@@ -94,7 +85,7 @@ namespace GTFuel
                     var itemKey = item.Key;
                     var itemValue = item.Value;
                     bool EngineStatus = API.getVehicleEngineStatus(itemKey);
-                    API.sendChatMessageToAll("Motor an " + EngineStatus);
+                    
                     if (EngineStatus)
                     {
                         CurrentTank = FuelList.Get(itemKey);
@@ -105,32 +96,24 @@ namespace GTFuel
                             CurrentTank = 0f;
                             API.setVehicleEngineStatus(itemKey, false);
                         }
-                        API.sendChatMessageToAll("FahrzeugID " + itemKey + " Tank " + itemValue);
-                        FuelList.Set(itemKey, CurrentTank);
-
+                        
+                        //FuelList.Set(itemKey, CurrentTank);
+                        //API.sendChatMessageToAll("Car Refuled");
                         if (API.isPlayerInAnyVehicle(player))
                         {
                             API.triggerClientEvent(player, "update_fuel_client", FuelList.Get(vehicle));
                         }
                     }
                 }
+                
+                
             }
-
+            */
             if (eventName == "GET_VEHICLE_FUEL")
             {
                 API.triggerClientEvent(player, "SEND_VEHICLE_FUEL", FuelList.Get(vehicle));
             }
-            if (eventName == "GET_RPM")
-            {
-                //float vehicleRPM = (float)args[0];
-                //int vehicleSpeed = (int)args[1];
-                bool isJumpPressed = (bool)args[2];
-                RenderUI(player);
-
-                //API.sendChatMessageToAll(""+ vehicleSpeed + "");
-                ConsumeFuel(player.vehicle, 1f, 1f, isJumpPressed, player, API.getPlayerVehicle(player));
-                
-            }
+            
 
 
         }
@@ -186,7 +169,7 @@ namespace GTFuel
                 if (gasStationIndex != currentGasStationIndex)
                 {
                     // Found gas station in range
-                    API.sendChatMessageToAll("GasStation Found");
+                    
                     currentGasStationIndex = gasStationIndex;
                 }
             }
@@ -246,24 +229,30 @@ namespace GTFuel
         /// <param name="isJumpPressed"></param>
         /// <param name="player"></param>
         /// <param name="NetVehicle"></param>
-        public void ConsumeFuel(Vehicle vehicle, float vehicleRPM, float vehicleSpeed, bool isJumpPressed, Client player, NetHandle NetVehicle)
+        public void ConsumeFuel(Vehicle vehicle, float vehicleRPM, float vehicleSpeed, bool isJumpPressed, Client player, NetHandle NetVehicle, int TimeMatch, int seconds)
         {
 
             float fuel = FuelList.Get(NetVehicle);
-            float VehConsum = GetVehicleConsume(vehicle);
-            
+            float VehicleConsum = GetVehicleConsume(vehicle);
             // Consuming
-            if (fuel > 0 && vehicle.engineStatus)
+            if (fuel > 0 && vehicle.engineStatus && vehicleSpeed > 1)
             {
-                float normalizedRPMValue = (float)Math.Pow(VehConsum, 1.5);
-                
-                fuel -= normalizedRPMValue * fuelRPMImpact;
-                //fuel -= vehicleSpeed * fuelAccelerationImpact;
+                //float normalizedRPMValue = (float)Math.Pow(vehicleRPM, 1.5);
+
+                if (vehicleRPM > 0.7)
+                {
+                    fuel -= VehicleConsum;
+                }
+
+                fuel -= vehicleRPM * fuelRPMImpact;
+                fuel -= (vehicleSpeed / 70) * fuelAccelerationImpact;
                 fuel -= vehicle.maxTraction * fuelTractionImpact;
-                
+
                 fuel = fuel < 0f ? 0f : fuel;
-                
+
+
                 FuelList.Set(NetVehicle, fuel);
+
 
                 if (fuel <= 0f)
                 {
@@ -271,7 +260,7 @@ namespace GTFuel
                     API.setVehicleEngineStatus(NetVehicle, false);
                 }
 
-                API.triggerClientEvent(player, "update_fuel_client", FuelList.Get(player.vehicle));
+                API.triggerClientEvent(player, "update_fuel_client", FuelList.Get(NetVehicle));
             }
            
             // Refueling at gas station
@@ -286,52 +275,30 @@ namespace GTFuel
                 {
                     //ControlEngine(vehicle);
                 }
-
-                if (vehicle.engineStatus)
-                {
-                    //hud.InstructTurnOffEngine();
-                }
                 else
                 {
-                    //hud.InstructRefuelOrTurnOnEngine();
 
-                    if (refuelAllowed)
+                    if (isJumpPressed)
                     {
-                        if (isJumpPressed)
+                        /* Tank aufüllen
+                        if (fuel < fuelTankCapacity)
                         {
-                            /* Tank aufüllen
-                            if (fuel < fuelTankCapacity)
-                            {
-                                fuel += 0.1f;
-                                addedFuelCapacitor += 0.1f;
-                            }
-                            */
+                            fuel += 0.1f;
+                            addedFuelCapacitor += 0.1f;
                         }
-
-                        if (!isJumpPressed && addedFuelCapacitor > 0f)
-                        {
-                            //TriggerEvent("frfuel:fuelAdded", addedFuelCapacitor);
-                            //TriggerServerEvent("frfuel:fuelAdded", addedFuelCapacitor);
-                            addedFuelCapacitor = 0f;
-                        }
+                        */
                     }
-                }
 
-                //hud.RenderInstructions();
-                //PlayHUDAppearSound();
-                //hudActive = true;
-            }
-            else
-            {
-                /*
-                if (fuel != 0f && !vehicle.IsEngineRunning)
-                {
-                    vehicle.IsEngineRunning = true;
+                    if (!isJumpPressed && addedFuelCapacitor > 0f)
+                    {
+                        //TriggerEvent("frfuel:fuelAdded", addedFuelCapacitor);
+                        //TriggerServerEvent("frfuel:fuelAdded", addedFuelCapacitor);
+                        addedFuelCapacitor = 0f;
+                    }
+                    
                 }
-
-                hudActive = false;
-                */
             }
+
 
             VehicleSetFuelLevel(vehicle, fuel, NetVehicle);
         }
@@ -349,9 +316,11 @@ namespace GTFuel
             if (fuelLevel > max)
             {
                 fuelLevel = max;
+                FuelList.Set(NetVehicle, fuelLevel);
             }
 
-            FuelList.Set(NetVehicle, fuelLevel);
+
+            //API.sendChatMessageToAll("Set Fuel Level: "+ fuelLevel.ToString());
         }
 
         
@@ -366,6 +335,7 @@ namespace GTFuel
             {
                 if (VehiclesPetrolTanks.Has(vehicle))
                 {
+                    //API.sendChatMessageToAll("Fuel from list: "+ VehiclesPetrolTanks.Get(vehicle));
                     return VehiclesPetrolTanks.Get(vehicle);
                 }
                 else
@@ -374,7 +344,7 @@ namespace GTFuel
                 }
             }
 
-            API.sendChatMessageToAll("Vehicle is null");
+            
             return 65f;
         }
 
@@ -387,9 +357,9 @@ namespace GTFuel
         {
             if (vehicle != null)
             {
-                if (VehiclesPetrolTanks.Has(vehicle))
+                if (VehiclesPetrolTanks.HasConsum(vehicle))
                 {
-                    return VehiclesPetrolTanks.Get(vehicle);
+                    return VehiclesPetrolTanks.GetConsum(vehicle);
                 }
                 else
                 {
@@ -398,6 +368,16 @@ namespace GTFuel
             }
 
             return 5f;
+        }
+
+        private void OnPlayerEnterVehicle(Client sender, NetHandle vehicle)
+        {
+            if (!FuelList.ContainsKey(vehicle))
+            {
+                FuelList.Add(vehicle, VehicleMaxFuelLevel(sender.vehicle));
+            }
+
+            API.triggerClientEvent(sender, "update_fuel_client", FuelList.Get(vehicle));
         }
 
     }

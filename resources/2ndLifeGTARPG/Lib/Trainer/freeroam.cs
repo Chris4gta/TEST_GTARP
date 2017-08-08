@@ -77,7 +77,6 @@ namespace GTFuel
             if (name == "CREATE_VEHICLE")
             {
                 int model = (int)args[0];
-
                 if (!Enum.IsDefined(typeof(VehicleHash), model))
                     return;
 

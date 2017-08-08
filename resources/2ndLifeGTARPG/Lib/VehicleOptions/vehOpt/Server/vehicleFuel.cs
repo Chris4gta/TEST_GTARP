@@ -32,8 +32,8 @@ namespace GTFuel
 
         public VehicleFuelScript()
         {
-            API.onPlayerEnterVehicle += OnPlayerEnterVehicle;
-            //API.onClientEventTrigger += OnClientEvent;
+            
+            API.onClientEventTrigger += OnClientEvent;
         }
 
         public VehicleFuelScript(int vehicleID, Client sender, int model)
@@ -41,34 +41,37 @@ namespace GTFuel
             VehicleID = vehicleID;
             var rot = API.getEntityRotation(sender.handle);
             veh = API.createVehicle((VehicleHash)model, sender.position, new Vector3(0, 0, rot.Z), 0, 0);
+            API.sendChatMessageToAll("Auto hash: "+ model);
         }
 
-        /*
-        public void OnClientEvent(Client player, string eventName, params object[] args) //arguments param can contain multiple params
-        {
+        public void OnClientEvent(Client player, string eventName, params object[] args)
+        {//arguments param can contain multiple params
+            
             NetHandle vehicle = API.getPlayerVehicle(player);
+
             if (eventName == "UPDATE_FUEL")
             {
                 float CurrentTank;
 
+                
                 for (int i = FuelList.Count - 1; i >= 0; i--)
                 {
                     var item = FuelList.ElementAt(i);
                     var itemKey = item.Key;
                     var itemValue = item.Value;
                     bool EngineStatus = API.getVehicleEngineStatus(itemKey);
-                    API.sendChatMessageToAll("Motor an " + EngineStatus);
+                    
                     if (EngineStatus)
                     {
                         CurrentTank = FuelList.Get(itemKey);
-                        CurrentTank = CurrentTank - 1f;
+                        CurrentTank = CurrentTank - 0.02f;
 
                         if (CurrentTank <= 0f)
                         {
                             CurrentTank = 0f;
                             API.setVehicleEngineStatus(itemKey, false);
                         }
-                        API.sendChatMessageToAll("FahrzeugID " + itemKey + " Tank " + itemValue);
+                        
                         FuelList.Set(itemKey, CurrentTank);
 
                         if (API.isPlayerInAnyVehicle(player))
@@ -78,23 +81,9 @@ namespace GTFuel
                     }
                 }
             }
-
-            if (eventName == "GET_VEHICLE_FUEL")
-            {
-                API.triggerClientEvent(player, "SEND_VEHICLE_FUEL", FuelList.Get(vehicle));
-            }
-        }*/
-
-        private void OnPlayerEnterVehicle(Client sender, NetHandle vehicle)
-        {
-            if (!FuelList.ContainsKey(vehicle))
-            {
-                FuelList.Add(vehicle, Fuel);
-                //API.sendChatMessageToAll("Auto zur Liste hinzugefügt.");
-            }
-            //API.sendChatMessageToAll("Auto zur Liste hinzugefügt." + vehicle.ToString() + "Fuel " + Fuel.ToString());
-            API.triggerClientEvent(sender, "update_fuel_client", FuelList.Get(vehicle));
         }
+
+        
 
     }
 

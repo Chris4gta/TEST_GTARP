@@ -1,7 +1,7 @@
 ﻿var g_menu = API.createMenu("Tanken", "Kraftstoff", 0, 0, 6);
 g_menu.ResetKey(menuControl.Back);
 
-g_menu.AddItem(API.createMenuItem("Disel ", "Hier tankst du Disel."));
+g_menu.AddItem(API.createMenuItem("Diesel ", "Hier tankst du Diesel."));
 g_menu.AddItem(API.createMenuItem("Benzin", "Hier tankst du Benzin."));
 g_menu.AddItem(API.createMenuItem("Strom", "Hier tankst du Strom."));
 
