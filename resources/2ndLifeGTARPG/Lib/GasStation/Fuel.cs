@@ -363,10 +363,11 @@ namespace GTFuel
                 }
                 else
                 {
+                    API.sendChatMessageToAll("Fahrzeug noch nicht eingetragen für Consum.");
                     return 5f;
                 }
             }
-
+            API.sendChatMessageToAll("Fahrzeug noch nicht eingetragen für Consum.");
             return 5f;
         }
 
