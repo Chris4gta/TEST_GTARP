@@ -33,7 +33,7 @@ API.onUpdate.connect(function (sender, e) {
 
 
 	if (currentVehicleFuel != null && inVeh) {
-		API.dxDrawTexture("Lib/VehicleOptions/images/vehiclefuelicon.png", new Point(res_X -160, 550), new Size(50, 59), 0.0);
+		API.dxDrawTexture("Lib/VehicleOptions/images/vehiclefuelicon.png", new Point(res_X -160, 550), new Size(50, 50), 0.0);
         API.drawText("" + (currentVehicleFuel).toFixed(2) +" L", res_X - 15, 550, 0.5, 255, 255, 255, 255, 4, 2, false, true, 0);
 
 
